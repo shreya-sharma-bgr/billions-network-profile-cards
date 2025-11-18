@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billions Network Quiz</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Floating Tokens -->
+    <img class="token token1" src="assets/token-blue.png">
+    
+    <img class="token token3" src="assets/token-green.png">
+    <img class="token token4" src="assets/token-orange.png">
+    
+    <img class="token token6" src="assets/token-red.png">
+
+    <!-- Screen 1: Welcome -->
+    <section id="welcome-screen" class="screen active">
+        <img class="logo" src="assets/logo.png">
+        <h1>Billions Network</h1>
+        <p class="subtitle">Personality card — 99% nonsense, 100% fun</p>
+
+        <button id="startQuiz" class="main-btn">Start the Quiz</button>
+
+        <p class="footer">Made with ❤️ by 
+            <a href="https://x.com/shreyalives" target="_blank">Shreya</a>
+        </p>
+    </section>
+
+
+    <!-- Screen 2: Questions -->
+    <section id="question-screen" class="screen">
+        <h2 id="question-text"></h2>
+
+        <div id="options-box"></div>
+
+        <button id="nextBtn" class="main-btn">Next</button>
+
+        <!-- UPLOAD SECTION (only on last step) -->
+        <div id="uploadSection" class="upload-box" style="display:none; margin-top:20px;">
+            <label style="font-weight:600;">Upload your profile picture</label><br><br>
+            <input type="file" id="profileUpload" accept="image/*">
+        </div>
+
+        <p class="footer">Made with ❤️ by 
+            <a href="https://x.com/shreyalives" target="_blank">Shreya</a>
+        </p>
+    </section>
+
+
+    <!-- Screen 3: Result -->
+    <section id="result-screen" class="screen">
+        <div id="result-card">
+
+            <h3 class="card-title">My Billions-Network Card</h3>
+
+            <!-- FIXED ID -->
+            <img id="profilePicPreview" class="profile-pic" src="" alt="Profile">
+
+            <h2 id="result-name"></h2>
+
+            <p id="r1"></p>
+            <p id="r2"></p>
+            <p id="r3"></p>
+            <p id="r4"></p>
+            <p id="r5"></p>
+            <p id="r6"></p>
+
+            <h2 id="final-rating"></h2>
+            <p id="rating-quote"></p>
+
+            <button id="downloadCard" class="main-btn">Download Card</button>
+            <button id="shareX" class="main-btn">Share on X</button>
+            <button id="restart" class="main-btn">Do it again</button>
+
+        </div>
+
+        <p class="footer">Made with ❤️ by 
+            <a href="https://x.com/shreyalives" target="_blank">Shreya</a>
+        </p>
+    </section>
+
+
+<!-- ============================= -->
+<!--  REQUIRED FOR DOWNLOAD (FIX) -->
+<!-- ============================= -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<!-- Your main JS -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
