@@ -11,10 +11,8 @@
 
     <!-- Floating Tokens -->
     <img class="token token1" src="assets/token-blue.png">
-    
     <img class="token token3" src="assets/token-green.png">
     <img class="token token4" src="assets/token-orange.png">
-    
     <img class="token token6" src="assets/token-red.png">
 
     <!-- Screen 1: Welcome -->
@@ -39,11 +37,29 @@
 
         <button id="nextBtn" class="main-btn">Next</button>
 
-        <!-- UPLOAD SECTION (only on last step) -->
-        <div id="uploadSection" class="upload-box" style="display:none; margin-top:20px;">
-            <label style="font-weight:600;">Upload your profile picture</label><br><br>
-            <input type="file" id="profileUpload" accept="image/*">
-        </div>
+        <p class="footer">Made with ❤️ by 
+            <a href="https://x.com/shreyalives" target="_blank">Shreya</a>
+        </p>
+    </section>
+
+
+    <!-- ⭐ Screen 3: Upload Screen -->
+    <section id="upload-screen" class="screen">
+        <h2>Upload your profile picture</h2>
+
+        <p style="opacity:0.8; margin-top:10px;">This will appear on your Billions card.</p>
+
+        <input 
+            type="file" 
+            id="profileUpload" 
+            accept="image/*" 
+            style="margin-top:25px; font-size:16px;"
+        >
+
+        <!-- FIXED BUTTON ID (matches JS) -->
+        <button id="goToResult" class="main-btn" style="margin-top:25px;">
+            Continue
+        </button>
 
         <p class="footer">Made with ❤️ by 
             <a href="https://x.com/shreyalives" target="_blank">Shreya</a>
@@ -51,13 +67,12 @@
     </section>
 
 
-    <!-- Screen 3: Result -->
+    <!-- Screen 4: Result -->
     <section id="result-screen" class="screen">
         <div id="result-card">
 
             <h3 class="card-title">My Billions-Network Card</h3>
 
-            <!-- FIXED ID -->
             <img id="profilePicPreview" class="profile-pic" src="" alt="Profile">
 
             <h2 id="result-name"></h2>
@@ -83,13 +98,9 @@
         </p>
     </section>
 
-
-<!-- ============================= -->
-<!--  REQUIRED FOR DOWNLOAD (FIX) -->
-<!-- ============================= -->
+<!-- REQUIRED FOR DOWNLOAD -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-<!-- Your main JS -->
 <script src="js/app.js"></script>
 
 </body>
