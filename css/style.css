@@ -95,6 +95,12 @@ h1 {
     background: #ffffff33;
 }
 
+/* BLACK PLACEHOLDER */
+#nameInput::placeholder {
+    color: black !important;
+    opacity: 0.65;
+}
+
 /* ====================
    RESULT CARD
 ==================== */
@@ -161,7 +167,7 @@ h1 {
 }
 
 /* ====================
-   FLOATING TOKENS
+   FLOATING TOKENS (DESKTOP)
 ==================== */
 
 .token {
@@ -184,7 +190,7 @@ h1 {
 }
 
 /* ====================
-   UPLOAD SECTION (NEW)
+   UPLOAD SECTION
 ==================== */
 .upload-box {
     margin: 20px auto;
@@ -201,9 +207,7 @@ h1 {
     cursor: pointer;
 }
 
-
-
-/* ⭐ NEW — Upload Screen Layout Fix */
+/* Upload layout fix */
 #upload-screen h2 {
     font-size: 28px;
     font-family: 'Fredoka', sans-serif;
@@ -213,34 +217,44 @@ h1 {
     padding-top: 100px;
 }
 
-
-
-/* ⭐ Extra Mobile Fix */
+/* ============================
+   MOBILE IMPROVEMENTS
+============================ */
 @media (max-width: 480px) {
 
-    h1 {
-        font-size: 32px;
-    }
+    /* Hide extra tokens — keep only 2 */
+    .token3, .token6 { display: none !important; }
+
+    /* Keep token1 + token4, but spaced + smaller */
+    .token1 { top: 5%; left: 5%; width: 60px; opacity: 0.55; }
+    .token4 { top: 75%; right: 5%; width: 60px; opacity: 0.55; }
+
+    h1 { font-size: 32px; }
 
     #question-text {
         font-size: 22px;
         padding: 0 10px;
     }
 
+    /* Gradient option buttons */
     .option {
         font-size: 16px;
+        background: linear-gradient(90deg, rgba(255,140,200,0.35), rgba(120,200,255,0.35)) !important;
+        border: 1px solid rgba(255,255,255,0.3);
+        backdrop-filter: blur(4px);
     }
 
-    #upload-screen h2 {
-        font-size: 24px;
+    .option.selected {
+        background: linear-gradient(90deg, rgba(255,140,200,0.6), rgba(120,200,255,0.6)) !important;
+        border-color: white !important;
     }
+
+    #upload-screen h2 { font-size: 24px; }
 }
 
 
-
 /* ============================================
-   ⭐ NEW — QUESTION TRANSITION EFFECT
-   Fade-In + Slide-Up (STYLE C)
+   QUESTION TRANSITION
 ============================================ */
 .fadeSlide {
     animation: fadeSlideUp 0.45s ease forwards;
