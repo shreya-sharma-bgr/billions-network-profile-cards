@@ -1,258 +1,313 @@
-/* ====================
-   GLOBAL STYLES
-==================== */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Comic+Neue:wght@700&display=swap');
+// ==========================
+//  QUESTIONS + OPTIONS
+// ==========================
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+const questions = [
+    { q: "What is your name?", type: "input", key: "name" },
+    { q: "How many hours you're active daily?", options: ["1hr", "2hr", "4hr", "6+hrs"], key: "hours" },
 
-body {
-    background: #0046fe;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
-    padding-bottom: 50px;
-}
+    // UPDATED ROLE
+    { q: "Your biggest role in Billions Network?", options: ["24/7 helper", "OG", "Super OG", "Scouter"], key: "role" },
 
-.screen {
-    display: none;
-    padding-top: 80px;
-}
+    // UPDATED CONTRIBUTION
+    { q: "How long have you been contributing?", options: ["Less than 2 weeks", "1-2 months", "3-5 months", "6 months+"], key: "contribution" },
 
-.screen.active {
-    display: block;
-}
+    { q: "How much do you love Javi?", options: ["Who is Javi?", "Javi is good person", "My community leader", "Stans forever"], key: "javi" },
 
-/* ====================
-   LOGO
-==================== */
-.logo {
-    width: 90px;
-    margin-bottom: 20px;
-}
+    // UPDATED POWERPOINT RANGES
+    { q: "How many PowerPoints do you have?", options: ["1k-4k", "5k-9k", "10-14k", "15k+"], key: "power" },
 
-/* ====================
-   HEADINGS
-==================== */
-h1 {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 42px;
-    font-weight: 700;
-}
+    // UPDATED MESSAGES
+    { q: "How many messages have you sent?", options: ["Less than 3k", "5-9k", "10-14k", "15k+"], key: "messages" }
+];
 
-.subtitle {
-    font-size: 15px;
-    opacity: 0.9;
-    margin-bottom: 30px;
-}
+let step = 0;
+let answers = {};
+let selectedOption = null;
+let uploadedImageURL = "";
 
-/* ====================
-   BUTTONS
-==================== */
-.main-btn {
-    background: linear-gradient(90deg, #ff8ad1, #77ddff);
-    border: none;
-    padding: 14px 28px;
-    border-radius: 12px;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    color: black;
-    margin-top: 10px;
-    transition: 0.25s;
-}
+// ==========================
+//  SCREEN ELEMENTS
+// ==========================
+const welcomeScreen = document.getElementById("welcome-screen");
+const questionScreen = document.getElementById("question-screen");
+const uploadScreen = document.getElementById("upload-screen");
+const resultScreen = document.getElementById("result-screen");
 
-.main-btn:hover {
-    transform: scale(1.05);
-}
-
-/* ====================
-   QUESTION OPTIONS
-==================== */
-.option {
-    width: 80%;
-    max-width: 330px;
-    background: #ffffff12;
-    padding: 14px;
-    margin: 10px auto;
-    border-radius: 12px;
-    font-size: 18px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: 0.25s;
-}
-
-.option:hover {
-    transform: translateY(-3px);
-}
-
-.option.selected {
-    border: 2px solid #fff;
-    background: #ffffff33;
-}
-
-/* ====================
-   RESULT CARD
-==================== */
-#result-card {
-    width: 85%;
-    max-width: 460px;
-    margin: 40px auto;
-    padding: 25px;
-    background: linear-gradient(180deg, #005cff, #003bb8);
-    border-radius: 22px;
-    box-shadow: 0 0 20px #00000044;
-}
-
-.card-title {
-    font-family: 'Comic Neue', cursive;
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-/* PROFILE PIC */
-.profile-pic {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 5px solid white;
-    margin-bottom: 10px;
-    object-fit: cover;
-}
-
-/* Name */
-#result-name {
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 18px;
-}
-
-/* Rating */
-#final-rating {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    margin-top: 12px;
-}
-
-/* Quote */
-#rating-quote {
-    font-style: italic;
-    opacity: 0.9;
-    margin: 10px 0 20px 0;
-}
-
-/* ====================
-   FOOTER
-==================== */
-.footer {
-    margin-top: 40px;
-    opacity: 0.7;
-}
-
-.footer a {
-    color: white;
-    font-weight: 700;
-    text-decoration: underline;
-}
-
-/* ====================
-   FLOATING TOKENS
-==================== */
-
-.token {
-    position: fixed;
-    width: 85px;
-    opacity: 0.9;
-    animation: float 6s infinite ease-in-out;
-    pointer-events: none;
-}
-
-.token1 { top: 15%; left: 10%; animation-delay: 0s; }
-.token3 { bottom: 18%; left: 12%; animation-delay: 2s; }
-.token4 { top: 60%; right: 14%; animation-delay: 3s; }
-.token6 { top: 22%; left: 70%; animation-delay: 5s; }
-
-@keyframes float {
-    0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-}
-
-/* ====================
-   UPLOAD SECTION (NEW)
-==================== */
-.upload-box {
-    margin: 20px auto;
-    text-align: center;
-}
-
-#profileUpload {
-    margin-top: 12px;
-    padding: 10px;
-    background: #ffffff22;
-    border-radius: 10px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
+const questionText = document.getElementById("question-text");
+const optionsBox = document.getElementById("options-box");
+const nextBtn = document.getElementById("nextBtn");
+const profileUpload = document.getElementById("profileUpload");
 
 
-
-/* ⭐ NEW — Upload Screen Layout Fix */
-#upload-screen h2 {
-    font-size: 28px;
-    font-family: 'Fredoka', sans-serif;
-}
-
-#upload-screen {
-    padding-top: 100px;
-}
+// ==========================
+//  START QUIZ
+// ==========================
+document.getElementById("startQuiz").onclick = () => {
+    welcomeScreen.classList.remove("active");
+    questionScreen.classList.add("active");
+    loadQuestion();
+};
 
 
+// ==========================
+//  LOAD QUESTION + ANIMATION
+// ==========================
+function loadQuestion() {
 
-/* ⭐ Extra Mobile Fix */
-@media (max-width: 480px) {
+    questionScreen.classList.add("fadeSlide");
+    setTimeout(() => questionScreen.classList.remove("fadeSlide"), 450);
 
-    h1 {
-        font-size: 32px;
-    }
+    const q = questions[step];
 
-    #question-text {
-        font-size: 22px;
-        padding: 0 10px;
-    }
+    questionText.textContent = q.q;
+    optionsBox.innerHTML = "";
+    selectedOption = null;
 
-    .option {
-        font-size: 16px;
-    }
+    if (q.type === "input") {
+        optionsBox.innerHTML = `
+            <input id="nameInput" type="text"
+            placeholder="Enter your name"
+            class="option"
+            style="text-align:center;">
+        `;
+    } else {
+        q.options.forEach(opt => {
+            let div = document.createElement("div");
+            div.classList.add("option");
+            div.textContent = opt;
 
-    #upload-screen h2 {
-        font-size: 24px;
+            div.onclick = () => {
+                document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+                div.classList.add("selected");
+                selectedOption = opt;
+            };
+
+            optionsBox.appendChild(div);
+        });
     }
 }
 
 
+// ==========================
+//  NEXT BUTTON
+// ==========================
+nextBtn.onclick = () => {
 
-/* ============================================
-   ⭐ NEW — QUESTION TRANSITION EFFECT
-   Fade-In + Slide-Up (STYLE C)
-============================================ */
-.fadeSlide {
-    animation: fadeSlideUp 0.45s ease forwards;
+    const q = questions[step];
+
+    if (q.type === "input") {
+        let nameValue = document.getElementById("nameInput").value.trim();
+        if (nameValue === "") return alert("Enter your name!");
+        answers[q.key] = nameValue;
+
+    } else {
+        if (!selectedOption) return alert("Select an option!");
+        answers[q.key] = selectedOption;
+    }
+
+    step++;
+
+    // Go to upload screen
+    if (step >= questions.length) {
+
+        questionScreen.classList.remove("active");
+        uploadScreen.classList.add("active");
+
+        uploadScreen.classList.add("fadeSlide");
+        setTimeout(() => uploadScreen.classList.remove("fadeSlide"), 450);
+
+        return;
+    }
+
+    loadQuestion();
+};
+
+
+// ==========================
+//  PROFILE UPLOAD PREVIEW
+// ==========================
+profileUpload.addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = event => uploadedImageURL = event.target.result;
+    reader.readAsDataURL(file);
+});
+
+
+// ==========================
+//  FINISH UPLOAD + SHOW RESULT
+//  (FIXED BUTTON ID → goToResult)
+// ==========================
+document.getElementById("goToResult").onclick = () => {
+
+    if (!uploadedImageURL) {
+        if (!confirm("No profile picture selected. Continue without photo?")) return;
+    }
+
+    uploadScreen.classList.remove("active");
+    resultScreen.classList.add("active");
+
+    resultScreen.classList.add("fadeSlide");
+    setTimeout(() => resultScreen.classList.remove("fadeSlide"), 450);
+
+    showResult();
+};
+
+
+// ==========================
+//  UPDATED SCORING SYSTEM
+// ==========================
+function calculateScore() {
+    let score = 0;
+
+    // HOURS
+    if (answers.hours === "6+hrs") score += 4;
+    else if (answers.hours === "4hr") score += 3;
+    else if (answers.hours === "2hr") score += 2;
+    else score += 1;
+
+    // ROLE
+    if (answers.role === "24/7 helper") score += 5;
+    else if (answers.role === "Scouter") score += 4;
+    else if (answers.role === "Super OG") score += 3;
+    else if (answers.role === "OG") score += 1;
+
+    // CONTRIBUTION
+    if (answers.contribution === "6 months+") score += 4;
+    else if (answers.contribution === "3-5 months") score += 3;
+    else if (answers.contribution === "1-2 months") score += 2;
+    else score += 1;
+
+    // JAVI
+    if (answers.javi === "Stans forever") score += 4;
+    else if (answers.javi === "My community leader") score += 3;
+    else if (answers.javi === "Javi is good person") score += 2;
+
+    // POWERPOINTS
+    if (answers.power === "15k+") score += 4;
+    else if (answers.power === "10-14k") score += 3;
+    else if (answers.power === "5k-9k") score += 2;
+
+    // MESSAGES
+    if (answers.messages === "15k+") score += 4;
+    else if (answers.messages === "10-14k") score += 3;
+    else if (answers.messages === "5-9k") score += 2;
+
+    return score;
 }
 
-@keyframes fadeSlideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(18px);
+
+// ==========================
+//  SHOW RESULT
+// ==========================
+function showResult() {
+
+    let score = calculateScore();
+
+    const quotes = {
+        normie: ["Touch some crypto, brother.", "You're still loading…", "Normie detected. No worries."],
+        real: ["Steady effort, steady gains.", "You're cooking… slow flame.", "Certified real human."],
+        active: ["Active and alive!", "Your grind is showing.", "You are warming up the server."],
+        celestial: ["Bro… take fresh air.", "Your phone battery fears you.", "You exist on another layer."],
+        god: ["Are you even real?", "Your keyboard must be burning.", "This is divine-level grinding."]
+    };
+
+    let rating = "";
+    let quote = "";
+
+    if (score <= 6) {
+        rating = "NORMIE";
+        quote = quotes.normie[Math.floor(Math.random()*quotes.normie.length)];
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+    else if (score <= 10) {
+        rating = "REAL HUMAN";
+        quote = quotes.real[Math.floor(Math.random()*quotes.real.length)];
     }
+    else if (score <= 14) {
+        rating = "ACTIVE HUMAN";
+        quote = quotes.active[Math.floor(Math.random()*quotes.active.length)];
+    }
+    else if (score <= 18) {
+        rating = "CELESTIAL BEING";
+        quote = quotes.celestial[Math.floor(Math.random()*quotes.celestial.length)];
+    }
+    else {
+        rating = "GOD TIER";
+        quote = quotes.god[Math.floor(Math.random()*quotes.god.length)];
+    }
+
+    document.getElementById("result-name").textContent = answers.name;
+    document.getElementById("r1").textContent = "Time active: " + answers.hours;
+    document.getElementById("r2").textContent = "Role: " + answers.role;
+    document.getElementById("r3").textContent = "Contributor for: " + answers.contribution;
+    document.getElementById("r4").textContent = "Javi fan rating: " + answers.javi;
+    document.getElementById("r5").textContent = "PowerPoints: " + answers.power;
+    document.getElementById("r6").textContent = "Messages sent: " + answers.messages;
+
+    document.getElementById("final-rating").textContent = "Rating: " + rating;
+    document.getElementById("rating-quote").textContent = `"${quote}"`;
+
+    document.getElementById("profilePicPreview").src =
+        uploadedImageURL || "assets/logo.png";
 }
+
+
+// ==========================
+//  DOWNLOAD CARD
+// ==========================
+document.getElementById("downloadCard").onclick = async function () {
+
+    const card = document.getElementById("result-card");
+    const originalBG = card.style.background;
+
+    card.style.background = "#005cff";
+
+    try {
+        const canvas = await html2canvas(card, {
+            backgroundColor: "#005cff",
+            scale: 3,
+            useCORS: true
+        });
+
+        canvas.toBlob(blob => {
+            const link = document.createElement("a");
+            link.download = "billions-card.png";
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+        });
+
+    } catch (e) {
+        alert("Download failed.");
+    }
+
+    card.style.background = originalBG;
+};
+
+
+// ==========================
+//  SHARE ON X
+// ==========================
+document.getElementById("shareX").onclick = () => {
+    const text = encodeURIComponent(
+        "Check out my Billions Network card!\nMade by @shreyalives for @billions_ntwk & @jgonzalezferrer"
+    );
+    window.open("https://twitter.com/intent/tweet?text=" + text, "_blank");
+};
+
+
+// ==========================
+//  RESTART
+// ==========================
+document.getElementById("restart").onclick = () => {
+    step = 0;
+    answers = {};
+    uploadedImageURL = "";
+
+    resultScreen.classList.remove("active");
+    uploadScreen.classList.remove("active");
+    welcomeScreen.classList.add("active");
+};
