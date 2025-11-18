@@ -169,13 +169,12 @@ h1 {
     width: 85px;
     opacity: 0.9;
     animation: float 6s infinite ease-in-out;
+    pointer-events: none;
 }
 
 .token1 { top: 15%; left: 10%; animation-delay: 0s; }
-.token2 { top: 35%; right: 8%; animation-delay: 1s; }
 .token3 { bottom: 18%; left: 12%; animation-delay: 2s; }
 .token4 { top: 60%; right: 14%; animation-delay: 3s; }
-.token5 { bottom: 30%; right: 20%; animation-delay: 4s; }
 .token6 { top: 22%; left: 70%; animation-delay: 5s; }
 
 @keyframes float {
@@ -200,4 +199,60 @@ h1 {
     color: white;
     font-size: 16px;
     cursor: pointer;
+}
+
+
+
+/* ⭐ NEW — Upload Screen Layout Fix */
+#upload-screen h2 {
+    font-size: 28px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+#upload-screen {
+    padding-top: 100px;
+}
+
+
+
+/* ⭐ Extra Mobile Fix */
+@media (max-width: 480px) {
+
+    h1 {
+        font-size: 32px;
+    }
+
+    #question-text {
+        font-size: 22px;
+        padding: 0 10px;
+    }
+
+    .option {
+        font-size: 16px;
+    }
+
+    #upload-screen h2 {
+        font-size: 24px;
+    }
+}
+
+
+
+/* ============================================
+   ⭐ NEW — QUESTION TRANSITION EFFECT
+   Fade-In + Slide-Up (STYLE C)
+============================================ */
+.fadeSlide {
+    animation: fadeSlideUp 0.45s ease forwards;
+}
+
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
